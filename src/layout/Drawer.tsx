@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { drawerWidth } from '../config';
+import { DRAWER_WIDTH } from '../config';
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -26,10 +26,10 @@ const Drawer: React.FC<DrawerProps> = ({ open, onDrawerClose }) => {
   return (
     <MuiDrawer
       sx={{
-        width: drawerWidth,
+        width: DRAWER_WIDTH,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: drawerWidth,
+          width: DRAWER_WIDTH,
           boxSizing: 'border-box',
         },
       }}
