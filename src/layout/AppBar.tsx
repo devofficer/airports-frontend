@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
-import { DRAWER_WIDTH } from '../config';
+import { DRAWER_WIDTH } from '../utils/constants';
 
 interface StyledAppBarProps extends MuiAppBarProps {
   open?: boolean;

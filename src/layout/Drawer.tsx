@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { DRAWER_WIDTH } from '../config';
+import { DRAWER_WIDTH } from '../utils/constants';
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',

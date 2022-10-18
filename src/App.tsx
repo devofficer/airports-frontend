@@ -1,9 +1,15 @@
 import React from 'react';
 import GoogleMap, { GoogleMapWrapper } from './components/GoogleMap';
-import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from './config';
+import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from './utils/constants';
 import MainLayout from './layout/MainLayout';
+import { getAirports } from './services/apiAirports';
 
 function App() {
+  
+  React.useEffect(() => {
+    getAirports();
+  }, []);
+
   return (
     <MainLayout>
       <GoogleMapWrapper>
