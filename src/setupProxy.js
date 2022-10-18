@@ -8,4 +8,14 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/aviationstack',
+    createProxyMiddleware({
+      target: 'http://api.aviationstack.com/',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/aviationstack/v1': '/v1'
+      }
+    })
+  );
 };

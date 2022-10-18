@@ -1,5 +1,5 @@
-import aeroService from "./aeroService";
+import aviationstackService from "./aviationService";
 
 export const getAirports = async () => {
-  return aeroService.get('/airports');
+  return aviationstackService.get('/airports');
 }
