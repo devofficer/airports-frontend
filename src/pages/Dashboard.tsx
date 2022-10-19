@@ -9,12 +9,19 @@ import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from '../utils/constants';
 import { getAirports } from '../services/apiAirports';
 import AirportSelect from '../components/AirportSelect';
 import { haversineDistance } from '../utils/helpers';
+import { LoadingContext } from '../contexts/loadingContext';
 
 
 function Dashboard() {
-  const { data } = useQuery('airports', () => getAirports({ limit: 999999 }), {
+  const { setLoading, setLoadingMessage } = React.useContext(LoadingContext);
+  const { data } = useQuery('airports', () => {
+    setLoading(true);
+    setLoadingMessage('Fetching airports data...');
+    return getAirports({ limit: 999999 });
+  }, {
     refetchOnWindowFocus: false,
-    initialData: []
+    initialData: [],
+    onSuccess: () => setLoading(false)
   });
   const [originAirport, setOriginAirport] = React.useState<Airport | null>(null);
   const [destAirport, setDestAirport] = React.useState<Airport | null>(null);
