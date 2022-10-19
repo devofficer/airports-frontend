@@ -1,6 +1,22 @@
-# Getting Started with Create React App
+# Montauk Airport Distance Service
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Airport data feeds
+
+[Aviationstack](https://aviationstack.com/) is selected as main data feeds for implemention of this tiny service.
+
+The project just requires airports list data with digital code and the aviationstack was an ideal match to get all airports in United States.
+
+But unfortunately, in order to use searching functionality, it was mandatory to use a premium account and it's a little wasting money for this kinda test assessment, so just used free account and filtering region is manually implemented on client side.
+
+As a result, all airports list is fetched, so it takes time to get final airports list in United States, but it would be easily fixed by using premium account definitely.
+
+On the other hand, the free account doesn't support secured http request and it's one of requirements to deploy the application on netlify (netlify does only support https protocol), so cors-anywhere-proxy is used to make it enable to use http request from https domain.
+
+## Deployment
+
+The application is deployed on netlify: [https://montauk.netlify.com](https://montauk.netlify.com)
 
 ## Available Scripts
 
@@ -14,11 +30,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `yarn build`
 
 Builds the app for production to the `build` folder.\
@@ -28,19 +39,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

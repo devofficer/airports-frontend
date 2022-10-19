@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery } from 'react-query'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -13,7 +12,7 @@ import { haversineDistance } from '../utils/helpers';
 
 function Dashboard() {
   const data = useAirports();
-  
+
   const [originAirport, setOriginAirport] = React.useState<Airport | null>(null);
   const [destAirport, setDestAirport] = React.useState<Airport | null>(null);
 
