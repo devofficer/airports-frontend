@@ -24,6 +24,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ children, originAirport, destAirp
   const [map, setMap] = React.useState<google.maps.Map>();
   const [originMarker, setOriginMarker] = React.useState<google.maps.Marker>();
   const [destMarker, setDestMarker] = React.useState<google.maps.Marker>();
+  const [airlineRoute, setAirlineRoute] = React.useState<google.maps.Polyline>();
 
   React.useEffect(() => {
     if (ref.current && !map) {
@@ -33,11 +34,12 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ children, originAirport, destAirp
       setMap(newMap);
       setOriginMarker(new google.maps.Marker({ map: newMap, visible: false }));
       setDestMarker(new google.maps.Marker({ map: newMap, visible: false }));
+      setAirlineRoute(new google.maps.Polyline({ map: newMap, visible: false, strokeColor: '#ff0000' }));
     }
   }, [ref, map, props]);
 
   React.useEffect(() => {
-    if (!map || !originMarker || !destMarker) {
+    if (!map || !originMarker || !destMarker || !airlineRoute) {
       return;
     }
 
@@ -60,7 +62,20 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ children, originAirport, destAirp
     } else {
       destMarker.setVisible(false);
     }
-  }, [originAirport, destAirport, map, originMarker, destMarker]);
+
+    if (originAirport && destAirport) {
+      const pt1 = originMarker.getPosition() as google.maps.LatLng;
+      const pt2 = destMarker.getPosition() as google.maps.LatLng;
+
+      airlineRoute.setPath([pt1, pt2]);
+      airlineRoute.setVisible(true);
+
+      map.fitBounds(new google.maps.LatLngBounds(pt1, pt2));
+    } else {
+      airlineRoute.setVisible(false);
+    }
+    // eslint-disable-next-line
+  }, [originAirport, destAirport, map]);
 
   return (
     <Box ref={ref} sx={{ width: '100%', height: '100%' }} />
