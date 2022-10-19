@@ -1,16 +1,19 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 
-interface AirportSelectProps {
+interface AirportSelectProps extends Partial<AutocompleteProps<AirportType, false, false, false>> {
   airports: AirportType[];
   label?: string;
 }
 
-const AirportSelect: React.FC<AirportSelectProps> = ({ airports, label }) => {
+const AirportSelect: React.FC<AirportSelectProps> = ({ airports, label, ...props }) => {
+  const [inputValue, setInputValue] = React.useState('');
+
   return (
     <Autocomplete
+      {...props}
       options={airports}
       autoHighlight
       fullWidth
@@ -20,6 +23,10 @@ const AirportSelect: React.FC<AirportSelectProps> = ({ airports, label }) => {
           {option.airport_name} ({option.iata_code})
         </Box>
       )}
+      inputValue={inputValue}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
