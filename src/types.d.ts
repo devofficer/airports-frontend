@@ -23,3 +23,8 @@ interface Pagination {
 interface QueryParams extends Pagination {
   search?: string;
 }
+
+interface LatLngPt {
+  latitude: number;
+  longitude: number;
+}

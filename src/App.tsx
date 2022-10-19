@@ -9,6 +9,7 @@ import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from './utils/constants';
 import { getAirports } from './services/apiAirports';
 import MainLayout from './layout/MainLayout';
 import AirportSelect from './components/AirportSelect';
+import { haversineDistance } from './utils/helpers';
 
 
 function App() {
@@ -18,15 +19,27 @@ function App() {
   });
   const [originAirport, setOriginAirport] = React.useState<AirportType | null>(null);
   const [destAirport, setDestAirport] = React.useState<AirportType | null>(null);
+  
   const distance = React.useMemo(() => {
+    if (originAirport && destAirport) {
+      return haversineDistance(originAirport, destAirport);
+    }
     return 0;
   }, [originAirport, destAirport]);
+
+  const handleChangeOriginAirport = (event: any, value: AirportType | null) => {
+    setOriginAirport(value);
+  }
+
+  const handleChangeDestAirport = (event: any, value: AirportType | null) => {
+    setDestAirport(value);
+  }
 
   return (
     <MainLayout>
       <Grid container spacing={4}>
         <Grid item md={8} xs={12}>
-          <Box sx={{ width: '100%', height: 400 }}>
+          <Box sx={{ width: '100%', height: '60vh' }}>
             <GoogleMap
               zoom={DEFAULT_ZOOM}
               center={DEFAULT_CENTER}
@@ -43,7 +56,7 @@ function App() {
               airports={data}
               label="Choose origin airport"
               value={originAirport}
-              onChange={(event: any, value: AirportType | null) => setOriginAirport(value)}
+              onChange={handleChangeOriginAirport}
             />
           </Grid>
           <Grid item xs={12}>
@@ -51,7 +64,7 @@ function App() {
               airports={data}
               label="Choose destination airport"
               value={destAirport}
-              onChange={(event: any, value: AirportType | null) => setDestAirport(value)}
+              onChange={handleChangeDestAirport}
             />
           </Grid>
           <Grid item xs={12}>
