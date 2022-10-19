@@ -18,7 +18,7 @@ function App() {
   return (
     <MainLayout>
       <Grid container spacing={4}>
-        <Grid item xs={12}>
+        <Grid item md={8} xs={12}>
           <Box sx={{ width: '100%', height: 400 }}>
             <GoogleMap
               zoom={DEFAULT_ZOOM}
@@ -30,8 +30,13 @@ function App() {
             />
           </Box>
         </Grid>
-        <Grid item xs={12}>
-          <AirportSelect airports={data} />
+        <Grid item container md={4} xs={12} spacing={4} sx={{ display: 'block' }}>
+          <Grid item xs={12}>
+            <AirportSelect airports={data} label="Choose origin airport" />
+          </Grid>
+          <Grid item xs={12}>
+            <AirportSelect airports={data} label="Choose destination airport" />
+          </Grid>
         </Grid>
       </Grid>
     </MainLayout>
