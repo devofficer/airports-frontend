@@ -8,7 +8,7 @@ const MainLayout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    // setOpen(true);
   };
 
   const handleDrawerClose = () => {
