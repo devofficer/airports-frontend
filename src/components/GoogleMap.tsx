@@ -70,7 +70,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ children, originAirport, destAirp
       airlineRoute.setPath([pt1, pt2]);
       airlineRoute.setVisible(true);
 
-      map.fitBounds(new google.maps.LatLngBounds(pt1, pt2));
+      // map.fitBounds(new google.maps.LatLngBounds(pt1, pt2));
     } else {
       airlineRoute.setVisible(false);
     }
