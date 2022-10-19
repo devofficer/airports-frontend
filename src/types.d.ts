@@ -1,4 +1,4 @@
-type AirportType = {
+type Airport = {
   airport_id: string;
   airport_name: string;
   city_iata_code: string;

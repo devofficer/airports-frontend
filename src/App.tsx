@@ -17,8 +17,8 @@ function App() {
     refetchOnWindowFocus: false,
     initialData: []
   });
-  const [originAirport, setOriginAirport] = React.useState<AirportType | null>(null);
-  const [destAirport, setDestAirport] = React.useState<AirportType | null>(null);
+  const [originAirport, setOriginAirport] = React.useState<Airport | null>(null);
+  const [destAirport, setDestAirport] = React.useState<Airport | null>(null);
   
   const distance = React.useMemo(() => {
     if (originAirport && destAirport) {
@@ -27,11 +27,11 @@ function App() {
     return 0;
   }, [originAirport, destAirport]);
 
-  const handleChangeOriginAirport = (event: any, value: AirportType | null) => {
+  const handleChangeOriginAirport = (event: any, value: Airport | null) => {
     setOriginAirport(value);
   }
 
-  const handleChangeDestAirport = (event: any, value: AirportType | null) => {
+  const handleChangeDestAirport = (event: any, value: Airport | null) => {
     setDestAirport(value);
   }
 

@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
 
-interface AirportSelectProps extends Partial<AutocompleteProps<AirportType, false, false, false>> {
-  airports: AirportType[];
+interface AirportSelectProps extends Partial<AutocompleteProps<Airport, false, false, false>> {
+  airports: Airport[];
   label?: string;
 }
 
