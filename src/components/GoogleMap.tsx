@@ -5,7 +5,8 @@ import Box from '@mui/material/Box';
 
 interface GoogleMapProps extends google.maps.MapOptions {
   children?: React.ReactNode;
-  height?: string | number;
+  originAirport: Airport | null;
+  destAirport: Airport | null;
 }
 
 export const GoogleMapWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -18,18 +19,48 @@ export const GoogleMapWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
   );
 };
 
-const GoogleMap: React.FC<GoogleMapProps> = ({ children, ...props }) => {
+const GoogleMap: React.FC<GoogleMapProps> = ({ children, originAirport, destAirport, ...props }) => {
   const ref = React.useRef<HTMLDivElement>(null);
   const [map, setMap] = React.useState<google.maps.Map>();
+  const [originMarker, setOriginMarker] = React.useState<google.maps.Marker>();
+  const [destMarker, setDestMarker] = React.useState<google.maps.Marker>();
 
   React.useEffect(() => {
     if (ref.current && !map) {
-      setMap(new google.maps.Map(ref.current, {
+      const newMap = new google.maps.Map(ref.current, {
         ...props
-      }));
+      });
+      setMap(newMap);
+      setOriginMarker(new google.maps.Marker({ map: newMap, visible: false }));
+      setDestMarker(new google.maps.Marker({ map: newMap, visible: false }));
     }
-    // eslint-disable-next-line
-  }, [ref, map]);
+  }, [ref, map, props]);
+
+  React.useEffect(() => {
+    if (!map || !originMarker || !destMarker) {
+      return;
+    }
+
+    if (originAirport) {
+      originMarker.setPosition({
+        lat: Number(originAirport.latitude),
+        lng: Number(originAirport.longitude)
+      });
+      originMarker.setVisible(true);
+    } else {
+      originMarker.setVisible(false);
+    }
+
+    if (destAirport) {
+      destMarker.setPosition({
+        lat: Number(destAirport.latitude),
+        lng: Number(destAirport.longitude)
+      });
+      destMarker.setVisible(true);
+    } else {
+      destMarker.setVisible(false);
+    }
+  }, [originAirport, destAirport, map, originMarker, destMarker]);
 
   return (
     <Box ref={ref} sx={{ width: '100%', height: '100%' }} />

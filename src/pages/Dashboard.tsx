@@ -45,6 +45,8 @@ function Dashboard() {
               latLngBounds: MAP_BOUNDS,
               strictBounds: false
             }}
+            originAirport={originAirport}
+            destAirport={destAirport}
           />
         </Box>
       </Grid>
