@@ -32,7 +32,7 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ children, ...props }) => {
   }, [ref, map]);
 
   return (
-    <Box ref={ref} sx={{ width: '100%', height: props.height || '400px' }} />
+    <Box ref={ref} sx={{ width: '100%', height: '100%' }} />
   );
 };
 

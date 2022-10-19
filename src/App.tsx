@@ -1,27 +1,39 @@
 import React from 'react';
-import GoogleMap, { GoogleMapWrapper } from './components/GoogleMap';
+import { useQuery } from 'react-query'
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import GoogleMap from './components/GoogleMap';
 import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from './utils/constants';
-import MainLayout from './layout/MainLayout';
 import { getAirports } from './services/apiAirports';
+import MainLayout from './layout/MainLayout';
+import AirportSelect from './components/AirportSelect';
+
 
 function App() {
-  
-  React.useEffect(() => {
-    getAirports();
-  }, []);
+  const { data } = useQuery('airports', () => getAirports({ limit: 999999 }), {
+    refetchOnWindowFocus: false,
+    initialData: []
+  });
 
   return (
     <MainLayout>
-      <GoogleMapWrapper>
-        <GoogleMap
-          zoom={DEFAULT_ZOOM}
-          center={DEFAULT_CENTER}
-          restriction={{
-            latLngBounds: MAP_BOUNDS,
-            strictBounds: false
-          }}
-        />
-      </GoogleMapWrapper>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Box sx={{ width: '100%', height: 400 }}>
+            <GoogleMap
+              zoom={DEFAULT_ZOOM}
+              center={DEFAULT_CENTER}
+              restriction={{
+                latLngBounds: MAP_BOUNDS,
+                strictBounds: false
+              }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <AirportSelect airports={data} />
+        </Grid>
+      </Grid>
     </MainLayout>
   );
 }

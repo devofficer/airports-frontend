@@ -3,33 +3,27 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-interface AirportType {
-  code: string;
-  label: string;
-  phone: string;
-  suggested?: boolean;
-}
-
 interface AirportSelectProps {
   airports: AirportType[];
+  label?: string;
 }
 
-const AirportSelect: React.FC<AirportSelectProps> = ({ airports }) => {
+const AirportSelect: React.FC<AirportSelectProps> = ({ airports, label }) => {
   return (
     <Autocomplete
-      sx={{ width: 300 }}
       options={airports}
       autoHighlight
-      getOptionLabel={(option) => option.label}
+      fullWidth
+      getOptionLabel={(option) => `${option.airport_name} (${option.iata_code})`}
       renderOption={(props, option) => (
         <Box component="li" {...props}>
-          {option.label} ({option.code}) +{option.phone}
+          {option.airport_name} ({option.iata_code})
         </Box>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a airport"
+          label={label}
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password'
