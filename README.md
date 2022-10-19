@@ -16,7 +16,7 @@ On the other hand, the free account doesn't support secured http request and it'
 
 ## Deployment
 
-The application is deployed on netlify: [https://montauk.netlify.com](https://montauk.netlify.com)
+The application is deployed on netlify: [https://montauk.netlify.app](https://montauk.netlify.app)
 
 ## Available Scripts
 
