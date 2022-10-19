@@ -5,24 +5,15 @@ import Box from '@mui/material/Box';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import GoogleMap from '../components/GoogleMap';
-import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from '../utils/constants';
-import { getAirports } from '../services/apiAirports';
+import useAirports from '../hooks/useAirports';
 import AirportSelect from '../components/AirportSelect';
+import { DEFAULT_CENTER, DEFAULT_ZOOM, MAP_BOUNDS } from '../utils/constants';
 import { haversineDistance } from '../utils/helpers';
-import { LoadingContext } from '../contexts/loadingContext';
 
 
 function Dashboard() {
-  const { setLoading, setLoadingMessage } = React.useContext(LoadingContext);
-  const { data } = useQuery('airports', () => {
-    setLoading(true);
-    setLoadingMessage('Fetching airports data...');
-    return getAirports({ limit: 999999 });
-  }, {
-    refetchOnWindowFocus: false,
-    initialData: [],
-    onSuccess: () => setLoading(false)
-  });
+  const data = useAirports();
+  
   const [originAirport, setOriginAirport] = React.useState<Airport | null>(null);
   const [destAirport, setDestAirport] = React.useState<Airport | null>(null);
 
